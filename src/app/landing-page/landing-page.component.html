@@ -1,0 +1,27 @@
+<div class="landing-page">
+    <header class="hero">
+      <div class="hero-content">
+        <h1>{{ title }}</h1>
+        <h2>{{ subtitle }}</h2>
+        <p>{{ description }}</p>
+        <button class="cta-button">Únete al Reciclaje</button>
+      </div>
+    </header>
+  
+    <section class="mission">
+      <div class="container">
+        <h2>Nuestra Misión</h2>
+        <p>{{ mission }}</p>
+      </div>
+    </section>
+  
+    <section class="services">
+      <div class="container">
+        <h2>¿Qué Hacemos?</h2>
+        <ul>
+          <li *ngFor="let service of services">{{ service }}</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+  

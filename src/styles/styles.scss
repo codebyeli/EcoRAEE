@@ -1,0 +1,240 @@
+@import 'variables';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: $font-family-primary;
+  font-size: 16px; // Base font size
+  line-height: 1.6;
+  background-color: $background-color;
+  color: $text-color;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  min-height: 100vh;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+a {
+  text-decoration: none;
+  color: $primary-color;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: darken($primary-color, 10%);
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-family-primary;
+  color: $primary-color;
+  margin-bottom: $base-spacing;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: $base-spacing;
+}
+
+button {
+  background-color: $primary-color;
+  color: white;
+  border: none;
+  padding: $base-spacing 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: $border-radius;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  
+  &:hover {
+    background-color: darken($primary-color, 10%);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    background-color: darken($primary-color, 15%);
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $base-spacing;
+}
+
+.card {
+  background-color: white;
+  box-shadow: $box-shadow;
+  border-radius: $border-radius;
+  padding: $base-spacing;
+  margin-bottom: $base-spacing * 2;
+}
+
+.card-header {
+  font-weight: bold;
+  margin-bottom: $base-spacing;
+}
+
+.card-body {
+  padding-top: $base-spacing;
+}
+
+.card-footer {
+  font-size: 0.9rem;
+  color: $primary-color;
+  text-align: right;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  margin-bottom: $base-spacing;
+
+  &:focus {
+    border-color: $primary-color;
+    outline: none;
+  }
+
+  &::placeholder {
+    color: #aaa;
+  }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: $base-spacing;
+}
+
+.flex {
+    display: flex;
+  }
+  
+  .flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .flex-column {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .flex-row {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .grid {
+    display: grid;
+  }
+  
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .grid-cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .grid-gap {
+    gap: $base-spacing;
+  }
+  
+.hero {
+    // background: url('assets/hero-image.jpg') no-repeat center center;
+    background-size: cover;
+    color: white;
+    text-align: center;
+    padding: 100px 20px;
+    position: relative;
+    min-height: 400px;
+  
+    .hero-content {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  
+    .cta-button {
+      background-color: $secondary-color;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      border-radius: $border-radius;
+      transition: background-color 0.3s ease;
+  
+      &:hover {
+        background-color: darken($secondary-color, 10%);
+      }
+    }
+  }
+  
+
+@media (max-width: $mobile-breakpoint) {
+    body {
+      font-size: 14px; // Slightly smaller text on mobile
+    }
+  
+    .container {
+      padding: 0 10px;
+    }
+  
+    h1 {
+      font-size: 2rem; // Smaller heading sizes on mobile
+    }
+  
+    .card {
+      padding: calc($base-spacing / 1.5); // Less padding for cards
+    }
+  
+    .cta-button {
+      padding: 8px 16px; // Adjust button padding on mobile
+    }
+  }
+  
+  @media (max-width: $tablet-breakpoint) {
+    .container {
+      padding: 0 20px;
+    }
+  
+    .hero h1 {
+      font-size: 2.5rem;
+    }
+  
+    .hero h2 {
+      font-size: 1.5rem;
+    }
+  }
+  
