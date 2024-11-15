@@ -1,7 +1,7 @@
 <div class="login-container">
     <section class="login-form">
-      <h1>Iniciar Sesión</h1>
-      <form [formGroup]="loginForm"> 
+      <h1>Registrarse</h1>
+      <form [formGroup]="registerForm"> 
         <div class="form-group">
           <label for="username">Correo Electrónico</label>
           <input
@@ -23,12 +23,11 @@
             (input)="checkValidity()"
           />
         </div>
-        <button class="submit-btn" (click)="login()" [disabled]="!checkValidity()">Inicia Sesión</button>
+        <button class="submit-btn" (click)="register()" [disabled]="!checkValidity()">Registrate</button>
       </form>
   
       <div class="links">
-        <a href="/forgot-password" class="link">¿Olvidaste tu contraseña?</a>
-        <a href="/signup" class="link">¿No tienes una cuenta? Regístrate</a>
+        <a href="/login" class="link">¿Ya tienes cuenta? Inicia sesión</a>
       </div>
     </section>
   </div>
