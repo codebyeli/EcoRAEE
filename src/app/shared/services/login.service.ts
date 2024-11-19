@@ -12,6 +12,14 @@ export class LoginService {
   constructor(private httpClient: HttpClient) { }
 
   login(loginInfo: Login):Observable<any> {
+    return this.httpClient.post(`${url}/userAccess`, loginInfo, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  }
+
+  register(loginInfo: Login):Observable<any> {
     return this.httpClient.post(`${url}`, loginInfo, {
       headers: {
         'Content-Type': 'application/json',

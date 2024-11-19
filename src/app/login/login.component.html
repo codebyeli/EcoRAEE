@@ -3,14 +3,15 @@
       <h1>Iniciar Sesión</h1>
       <form [formGroup]="loginForm"> 
         <div class="form-group">
-          <label for="username">Correo Electrónico</label>
+          <label for="username">Cédula</label>
           <input
             type="username"
             id="username"
             formControlName="username"
-            placeholder="Ingresa tu correo electrónico"
-            (input)="checkValidity()"
+            placeholder="Ingresa tu Cédula"
+            (input)="checkValidity(); formatID($event)"
           />
+          <p *ngIf="loginForm.get('username')?.dirty && !loginForm.get('username')?.valid" class="error-message">Debes introducir un número de Cédula válido</p>
         </div>
   
         <div class="form-group">
@@ -28,7 +29,7 @@
   
       <div class="links">
         <a href="/forgot-password" class="link">¿Olvidaste tu contraseña?</a>
-        <a href="/signup" class="link">¿No tienes una cuenta? Regístrate</a>
+        <a href="/register" class="link">¿No tienes una cuenta? Regístrate</a>
       </div>
     </section>
   </div>
