@@ -1,0 +1,6 @@
+<div class="map-container" [class]="containerClass">
+  <div #mapContainer id="mapId" class="map-element"></div>
+  <div *ngIf="isLoading" class="map-loader">
+    <div class="spinner"></div>
+  </div>
+</div>
