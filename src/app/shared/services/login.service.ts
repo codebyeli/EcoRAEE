@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environments } from '../../../environments/environment';
 import { Login } from '../interfaces/login.interface';
 import { Profile } from '../interfaces/profile.interface';
+import { ForgotPasswordInfo } from '../interfaces/forgot-password.interface';
 let url = environments.loginApiUrl;
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,14 @@ export class LoginService {
 
   login(loginInfo: Login):Observable<any> {
     return this.httpClient.post(`${url}/userAccess`, loginInfo, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  }
+
+  changePassword(loginInfo: ForgotPasswordInfo):Observable<any> {
+    return this.httpClient.post(`${url}/forgotPassword`, loginInfo, {
       headers: {
         'Content-Type': 'application/json',
       },

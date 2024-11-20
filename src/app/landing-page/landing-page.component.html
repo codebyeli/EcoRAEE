@@ -4,7 +4,7 @@
         <h1>{{ title }}</h1>
         <h2>{{ subtitle }}</h2>
         <p>{{ description }}</p>
-        <button class="cta-button">Únete al Reciclaje</button>
+        <a href="/login" class="cta-button">Únete al Reciclaje</a>
       </div>
     </header>
   
@@ -21,6 +21,7 @@
         <ul>
           <li *ngFor="let service of services">{{ service }}</li>
         </ul>
+        <p>¿Quieres saber más sobre nosotros? <a href="/about-us" class="link">¡Conoce al equipo!</a></p>
       </div>
     </section>
   </div>

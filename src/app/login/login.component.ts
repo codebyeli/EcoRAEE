@@ -55,7 +55,6 @@ export class LoginComponent implements OnInit {
     this.attemptedSubmit = true;
     if (this.loginForm.valid) {
       this.loginService.login(this.loginForm.value).subscribe((res) => {
-        console.log(res);
         if (res === false){
           this.openSnackBar('Credenciales incorrectas', 'Cerrar')
         }

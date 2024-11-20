@@ -1,8 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {LandingPageModule} from './landing-page/landing-page.module';
-import {LoginModule} from './login/login.module';
-import {AboutUsModule} from './about-us/about-us.module';
 
 const routes: Routes = [
   {
@@ -24,6 +21,10 @@ const routes: Routes = [
   {
     path: 'dashboard',
     loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+  },
+  {
+    path: 'forgot-password',
+    loadChildren: () => import('./forgot-password/forgot-password.module').then(m => m.ForgotPasswordModule)
   }
 ];
 
