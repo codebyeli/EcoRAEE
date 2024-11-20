@@ -1,0 +1,46 @@
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  
+    &-header {
+      background-color: #4CAF50;
+      color: white;
+      padding: 1rem;
+      text-align: right; /* Align text to the right */
+    }
+  
+    &-body {
+      display: flex;
+      flex: 1;
+    }
+  
+    &-sidebar {
+      background-color: #f4f4f4;
+      padding: 1rem;
+      width: 200px;
+  
+      ul {
+        list-style: none;
+        padding: 0;
+  
+        li {
+          margin: 1rem 0;
+  
+          a {
+            text-decoration: none;
+            color: #333;
+  
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+  
+    &-content {
+      flex: 1;
+      padding: 1rem;
+    }
+  }
