@@ -1,5 +1,7 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AppErrorHandler } from './app-error-handler';
+import { LastRouteService } from './shared/services/last-route.service';
 
 const routes: Routes = [
   {
@@ -25,11 +27,16 @@ const routes: Routes = [
   {
     path: 'forgot-password',
     loadChildren: () => import('./forgot-password/forgot-password.module').then(m => m.ForgotPasswordModule)
-  }
+  },
+  { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [
+    { provide: ErrorHandler, useClass: AppErrorHandler },
+    LastRouteService
+  ]
 })
 export class AppRoutingModule { }
