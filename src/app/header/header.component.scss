@@ -1,0 +1,20 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #4CAF50;
+  }
+  
+  .login-button {
+    background-color: #4CAF50;
+    color: #f8f9fa;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .login-button:hover {
+    background-color: #f8f9fa;
+    color: #4CAF50;
+  }

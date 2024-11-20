@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { AboutUsRoutingModule } from './about-us-routing.module';
 import { AboutUsComponent } from './about-us.component';
+import { HeaderModule } from '../header/header.module';
 
 
 @NgModule({
@@ -11,7 +11,8 @@ import { AboutUsComponent } from './about-us.component';
   ],
   imports: [
     CommonModule,
-    AboutUsRoutingModule
+    AboutUsRoutingModule,
+    HeaderModule
   ]
 })
 export class AboutUsModule { }

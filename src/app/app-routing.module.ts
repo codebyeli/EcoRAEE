@@ -21,7 +21,7 @@ const routes: Routes = [
     loadChildren: () => import('./register/register.module').then(m => m.RegisterModule)
   },
   {
-    path: 'dashboard',
+    path: 'dashboard/:id',
     loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
   },
   {
