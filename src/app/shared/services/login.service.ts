@@ -13,6 +13,14 @@ export class LoginService {
 
   constructor(private httpClient: HttpClient) { }
 
+  getProfile(profileId: string):Observable<any> {
+    return this.httpClient.get(`${url}/${profileId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  }
+
   login(loginInfo: Login):Observable<any> {
     return this.httpClient.post(`${url}/userAccess`, loginInfo, {
       headers: {

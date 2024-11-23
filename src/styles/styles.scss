@@ -1,5 +1,6 @@
 @use '@angular/material' as mat;
 @import 'variables';
+@import 'flatpickr/dist/flatpickr.min.css';
 
 $my-primary: mat.define-palette(mat.$light-green-palette);
 $my-accent: mat.define-palette(mat.$yellow-palette);

@@ -1,0 +1,46 @@
+<div class="appointment-container">
+    <h2>Crear una cita</h2>
+    
+    <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()" class="appointment-form">
+      <div class="form-row">
+        <div class="form-group">
+            <label for="date">Fecha</label>
+            <input 
+              id="date"
+              type="date"
+              formControlName="date"
+            >
+          </div>
+          
+          <div class="form-group">
+            <label for="time">Hora</label>
+            <select id="time" formControlName="time">
+              <option *ngFor="let slot of timeSlots" [value]="slot">{{ slot }}</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="description">Residuos a recolectar</label>
+            <textarea id="description" formControlName="description"></textarea>
+          </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="description">Residuos a recolectar</label>
+        <textarea 
+          id="description"
+          formControlName="description"
+          placeholder="Liste los objetos que desea que recolectemos"
+          rows="4"
+        ></textarea>
+      </div>
+      <button 
+        type="submit" 
+        [disabled]="!appointmentForm.valid"
+        class="submit-button"
+      >
+        Create Appointment
+      </button>
+    </form>
+  </div>
+  

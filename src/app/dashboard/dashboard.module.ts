@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { MapModule } from '../map/map.module';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { MapModule } from '../map/map.module';
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    MapModule
+    MapModule,
+    MatDialogModule,
   ]
 })
 export class DashboardModule { }

@@ -1,20 +1,21 @@
-<div class="dashboard">
+<div class="dashboard" *ngIf="!error">
     <header class="dashboard-header">
-      <h1>Welcome X</h1>
+      <p>Bienvenido, {{this.profile.name}}!</p>
     </header>
     <div class="dashboard-body">
-      <nav class="dashboard-sidebar">
-        <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Profile</a></li>
-          <li><a href="#">Settings</a></li>
-        </ul>
-      </nav>
       <main class="dashboard-content">
-        <p>Welcome to the dashboard!</p>
+        <button (click)="openAppointmentsDialog()" style="margin-bottom: 1%;">Agendar cita</button>
         <div class="dashboard-map">
           <app-map></app-map>
         </div>
+      </main>
+    </div>
+  </div>
+
+  <div class="dashboard" *ngIf="error">
+    <div class="dashboard-body">
+      <main class="dashboard-content">
+        <p class="error-message">Ha ocurrido un error. Por favor, intenta iniciar sesión otra vez.</p>
       </main>
     </div>
   </div>
