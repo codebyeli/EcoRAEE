@@ -20,6 +20,16 @@
       </div>
   
       <div class="form-group">
+        <label for="time">Lugar</label>
+        <input 
+        id="location"
+        type="text"
+        formControlName="location"
+        placeholder="Ingrese un link de Google Maps con la ubicación"
+        (input)="longitudeAndLatitudeFill()"
+        >
+      </div>
+      <div class="form-group">
         <label for="description">Residuos a recolectar</label>
         <textarea 
           id="description"

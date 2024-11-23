@@ -1,4 +1,4 @@
-import { AbstractControl, ValidationErrors } from '@angular/forms';
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 export function isValidDominicanID(control: AbstractControl): ValidationErrors | null {
   const regex = /^\d{3}-\d{7}-\d{1}$/;
@@ -19,4 +19,35 @@ export function passwordValidator(control: AbstractControl): ValidationErrors | 
     return { invalidPassword: true }; 
   } 
   return null;
+}
+
+export function googleMapsLinkValidator(required: boolean = false): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    if (!required && (control.value === null || control.value === '')) {
+      return null;
+    }
+
+    const urlPattern = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/;
+    const isValidUrl = urlPattern.test(control.value);
+
+    if (!isValidUrl) {
+      return { invalidUrl: true };
+    }
+
+    if (control.value.includes('google.com/maps')) {
+      const latLngPattern = /@(-?\d+(\.\d+)?),(-?\d+(\.\d+)?),\d+(\.\d+)?z/;
+      const isValidLatLng = latLngPattern.test(control.value.split('?')[0]);
+
+      if (isValidLatLng) {
+        return null;
+      }
+
+      const qPattern = /q=(-?\d+(\.\d+)?),(-?\d+(\.\d+)?)/;
+      const isValidQ = qPattern.test(control.value);
+
+      return isValidQ ? null : { invalidLatLng: true };
+    }
+
+    return { notGoogleMapsUrl: true };
+  };
 }

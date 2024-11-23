@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AppointmentsComponent } from './appointments.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { MatDialogModule } from '@angular/material/dialog';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSnackBarModule
   ],
   exports: [
     AppointmentsComponent

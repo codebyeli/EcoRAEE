@@ -5,6 +5,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { MapModule } from '../map/map.module';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     DashboardRoutingModule,
     MapModule,
     MatDialogModule,
+    MatSnackBarModule
   ]
 })
 export class DashboardModule { }
