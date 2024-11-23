@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import flatpickr from 'flatpickr';
 
 @Component({
   selector: 'app-appointments',
@@ -23,13 +24,16 @@ export class AppointmentsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const dateInput = document.getElementById('date') as HTMLInputElement;
-    if (dateInput) {
-      const today = new Date().toISOString().split('T')[0];
-      dateInput.min = today;
-    }
+    flatpickr('#date', {
+      minDate: 'today',
+      disable: [
+        function (date) {
+          return date.getDay() === 0;
+        },
+      ],
+      dateFormat: 'd/m/Y',
+    });
   }
-
   private generateTimeSlots(): string[] {
     const slots: string[] = [];
     for (let hour = 9; hour <= 17; hour++) {
