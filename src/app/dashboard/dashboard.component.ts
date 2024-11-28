@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AppointmentsComponent } from '../appointments/appointments.component';
 import { ActivatedRoute } from '@angular/router';
@@ -17,15 +17,25 @@ export class DashboardComponent {
   public error: boolean = false;
   public profile: any;
   public displayedColumns: string[] = [
+    'name',
     'status',
     'date',
     'time',
     'appointmentCreated',
     'actions',
   ];
+  public specificDisplayedColumns: string[] = [
+    'status',
+    'date',
+    'time',
+    'appointmentCreated',
+    'actions',
+  ];
+  public specificappointments: any
   public appointments: any
 
-  constructor(private dialog: MatDialog, private activatedRoute: ActivatedRoute, private loginService : LoginService, private _snackBar: MatSnackBar, private appointmentsService: AppointmentsService) {
+
+  constructor(private dialog: MatDialog, private activatedRoute: ActivatedRoute, private loginService : LoginService, private _snackBar: MatSnackBar, private appointmentsService: AppointmentsService, private cdr: ChangeDetectorRef) {
     this.idProfile = this.activatedRoute.snapshot.paramMap.get('id');
     if (this.idProfile) {
       forkJoin({
@@ -35,16 +45,23 @@ export class DashboardComponent {
             return of(null);
           })
         ),
-        appointments: this.appointmentsService.getAppointmentsByProfile(this.idProfile).pipe(
+        specificAppointments: this.appointmentsService.getAppointmentsByProfile(this.idProfile).pipe(
           catchError(error => {
             console.error(error);
             return of([]); 
           })
-        )
-      }).subscribe(({ profile, appointments }) => {
+        ),
+        appointments: this.appointmentsService.getAppointments().pipe(
+          catchError(error => {
+            console.error(error);
+            return of([]); 
+          })
+        ),
+      }).subscribe(({ profile, specificAppointments, appointments }) => {
         if (profile) {
           this.profile = profile;
         }
+        this.specificappointments = specificAppointments;
         this.appointments = appointments;
       });
     }
@@ -67,10 +84,27 @@ export class DashboardComponent {
     return status ? 'Confirmada' : 'En proceso de confirmación';
   }
 
-  deleteAppointment(id:string){
+  deleteAppointment(id: string) {
     this.appointmentsService.deleteAppointment(id).subscribe(() => {
       this.openSnackBar('Cita eliminada', 'Cerrar');
+      this.specificappointments = this.specificappointments.filter((appointment:any) => appointment._id !== id);
+      this.appointments = this.appointments.filter((appointment:any) => appointment._id !== id);
+      this.cdr.detectChanges();
     });
-    window.location.reload();
+  }
+  
+  confirmAppointment(id: string) {
+    this.appointmentsService.confirmAppointment(id).subscribe(() => {
+      this.openSnackBar('Cita confirmada', 'Cerrar');
+      const appointment = this.appointments.find((appointment:any) => appointment._id === id);
+      if (appointment) {
+        appointment.confirmed = true;
+      }
+      const specificAppointment = this.specificappointments.find((appointment:any) => appointment._id === id);
+      if (specificAppointment) {
+        specificAppointment.confirmed = true;
+      }
+      this.cdr.detectChanges();
+    });
   }
 }
