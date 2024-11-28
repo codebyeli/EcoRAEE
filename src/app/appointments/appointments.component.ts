@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import flatpickr from 'flatpickr';
 import { googleMapsLinkValidator } from '../shared/utils/utils';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AppointmentsService } from '../shared/services/appointments.service';
 
 @Component({
   selector: 'app-appointments',
@@ -14,7 +15,7 @@ export class AppointmentsComponent implements OnInit {
   appointmentForm: FormGroup;
   timeSlots: string[] = this.generateTimeSlots();
 
-  constructor(private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any, private dialogRef: MatDialogRef<AppointmentsComponent>, private snackBar: MatSnackBar,) {
+  constructor(private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any, private dialogRef: MatDialogRef<AppointmentsComponent>, private snackBar: MatSnackBar, private appointmentsService: AppointmentsService) {
     this.appointmentForm = this.fb.group({
       profileId: [data._id, Validators.required],
       date: ['', Validators.required],
@@ -73,9 +74,16 @@ onSubmit(): void {
     const formValue = this.appointmentForm.value;
     const { location, ...appointment } = formValue;
     this.dialogRef.close(appointment);
-    this.snackBar.open('Cita creada correctamente, esperando confirmacion...', 'Close', {
-      duration: 3000,
-    });
+    this.appointmentsService.createAppointment(appointment).subscribe({
+      next: () => {
+        this.snackBar.open('Cita creada correctamente, esperando confirmacion...', 'Close', {
+          duration: 3000,
+        });
+      }, error: (error) => {
+        console.log(error)
+      }
+    })
+    window.location.reload();
     this.appointmentForm.reset();
   }
 }

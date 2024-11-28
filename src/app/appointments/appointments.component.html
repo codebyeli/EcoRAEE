@@ -28,6 +28,9 @@
         placeholder="Ingrese un link de Google Maps con la ubicación"
         (input)="longitudeAndLatitudeFill()"
         >
+        <div *ngIf="this.appointmentForm.get('location')?.touched && this.appointmentForm.get('location')?.invalid" class="error-message">
+            Por favor, ingrese un enlace válido de Google Maps con la ubicacion de recogida que desea.
+          </div>
       </div>
       <div class="form-group">
         <label for="description">Residuos a recolectar</label>
@@ -43,7 +46,7 @@
         [disabled]="!appointmentForm.valid"
         class="submit-button"
       >
-        Create Appointment
+        Crear cita
       </button>
     </form>
   </div>

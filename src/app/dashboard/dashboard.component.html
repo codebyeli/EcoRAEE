@@ -1,21 +1,63 @@
 <div class="dashboard" *ngIf="!error">
-    <header class="dashboard-header">
-      <p>Bienvenido, {{this.profile.name}}!</p>
-    </header>
-    <div class="dashboard-body">
-      <main class="dashboard-content">
-        <button (click)="openAppointmentsDialog()" style="margin-bottom: 1%;">Agendar cita</button>
-        <div class="dashboard-map">
-          <app-map></app-map>
-        </div>
-      </main>
-    </div>
-  </div>
+  <header class="dashboard-header">
+    <p>Bienvenido, {{ this.profile.name }}!</p>
+  </header>
+  <div class="dashboard-body">
+    <main class="dashboard-content">
+      <table [dataSource]="appointments" mat-table>
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</th>
+          <td mat-cell *matCellDef="let row">{{ row.date }}</td>
+        </ng-container>
+        <ng-container matColumnDef="time">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Hora</th>
+          <td mat-cell *matCellDef="let row">{{ row.time }}</td>
+        </ng-container>
+        <ng-container matColumnDef="appointmentCreated">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Cita creada</th>
+          <td mat-cell *matCellDef="let row">
+            {{ row.createdAt | date : "dd/MM/yyyy HH:mm:ss" }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Estado de la cita
+          </th>
+          <td mat-cell *matCellDef="let row">
+            {{ translateStatus(row.confirmed) }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let row">
+            <a (click)="deleteAppointment(row._id)" class="primary-button">
+              <span class="material-icons md-36">delete</span>
+            </a>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 
-  <div class="dashboard" *ngIf="error">
-    <div class="dashboard-body">
-      <main class="dashboard-content">
-        <p class="error-message">Ha ocurrido un error. Por favor, intenta iniciar sesión otra vez.</p>
-      </main>
-    </div>
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No se encontraron resultados</td>
+        </tr>
+      </table>
+      <div class="add-appointment-container">
+        <button (click)="openAppointmentsDialog()">Agendar cita</button>
+      </div>
+      <div class="dashboard-map">
+        <app-map></app-map>
+      </div>
+    </main>
   </div>
+</div>
+
+<div class="dashboard" *ngIf="error">
+  <div class="dashboard-body">
+    <main class="dashboard-content">
+      <p class="error-message">
+        Ha ocurrido un error. Por favor, intenta iniciar sesión otra vez.
+      </p>
+    </main>
+  </div>
+</div>
