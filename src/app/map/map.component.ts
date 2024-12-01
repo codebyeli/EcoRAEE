@@ -148,7 +148,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       element: this.popupElement.nativeElement,
       positioning: 'bottom-center',
       stopEvent: false,
-      offset: [0, -10]
+      offset: [50, 70]
     });
 
     const initialCenter = fromLonLat([this.longitude, this.latitude]);
