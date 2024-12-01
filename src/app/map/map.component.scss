@@ -1,56 +1,326 @@
 .map-container {
-    width: 100%; 
-    height: 500px; 
-    position: relative;
-    overflow: hidden;
-    background: #f0f4f8;
-    border: 1px solid #ddd;
+  width: 100%; 
+  height: 500px; 
+  position: relative;
+  overflow: hidden;
+  background: #f0f4f8;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  }
+
+  .map-element {
+    width: 100%;
+    height: 100%;
+    position: absolute;
     border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease;
-  
-    &:hover {
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-    }
-  
-    .map-element {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      border-radius: 12px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-    }
-  
-    .map-loader {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+  }
+
+  // Hide default OpenLayers zoom controls
+  .ol-zoom {
+    display: none;
+  }
+
+  // Custom Controls Styling
+  .custom-zoom-control {
+    position: absolute !important; // Important to override OL defaults
+    top: 20px !important;
+    right: 20px !important;
+    background: white;
+    border-radius: 8px;
+    padding: 4px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 1; // Ensure controls are above the map
+
+    .zoom-button {
+      width: 36px;
+      height: 36px;
+      border: none;
+      background: white;
+      color: #444;
+      font-size: 20px;
+      cursor: pointer;
+      border-radius: 6px;
       display: flex;
-      justify-content: center;
       align-items: center;
-      background: rgba(255,255,255,0.7);
-      z-index: 1000;
-  
-      .spinner {
-        width: 50px;
-        height: 50px;
-        border: 5px solid #f3f3f3;
-        border-top: 5px solid #3498db;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
+      justify-content: center;
+      transition: all 0.2s ease;
+      padding: 0; // Reset padding
+
+      &:hover {
+        background: #f5f5f5;
+        color: #000;
+      }
+
+      &:active {
+        background: #eee;
+        transform: scale(0.95);
       }
     }
-  
-    // Spinner animation
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-  
-    // Responsive adjustments
-    @media (max-width: 768px) {
-      height: 300px;
+
+    .zoom-in {
+      border-bottom: 1px solid #eee;
     }
   }
+
+  .custom-fullscreen-button {
+    position: absolute !important;
+    top: 20px !important;
+    right: 70px !important;
+    width: 36px;
+    height: 36px;
+    background: white;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    color: #444;
+    z-index: 1;
+    padding: 0;
+
+    &:hover {
+      background: #f5f5f5;
+      color: #000;
+    }
+
+    &:active {
+      background: #eee;
+      transform: scale(0.95);
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  // Style the attribution control
+  .ol-attribution {
+    background: rgba(255, 255, 255, 0.8) !important;
+    border-radius: 8px !important;
+    padding: 4px 8px !important;
+    bottom: 10px !important;
+    right: 10px !important;
+    font-size: 12px !important;
+
+    &.ol-uncollapsible {
+      bottom: 10px !important;
+      right: 10px !important;
+    }
+
+    ul {
+      font-size: 12px !important;
+      color: #444;
+      padding: 0;
+      margin: 0;
+    }
+
+    button {
+      display: none !important;
+    }
+  }
+
+  .map-loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255,255,255,0.7);
+    z-index: 1000;
+
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid #3498db;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  // Responsive adjustments
+  @media (max-width: 768px) {
+    height: 300px;
+
+    .custom-zoom-control {
+      top: 10px !important;
+      right: 10px !important;
+    }
+
+    .custom-fullscreen-button {
+      top: 10px !important;
+      right: 56px !important;
+    }
+
+    .ol-attribution {
+      max-width: calc(100% - 20px);
+    }
+  }
+}
+
+// Fullscreen styles
+:fullscreen .map-container {
+  height: 100vh;
+  border-radius: 0;
+  border: none;
+}
+
+:-webkit-full-screen .map-container {
+  height: 100vh;
+  border-radius: 0;
+  border: none;
+}
+
+:-moz-full-screen .map-container {
+  height: 100vh;
+  border-radius: 0;
+  border: none;
+}
+
+:-ms-fullscreen .map-container {
+  height: 100vh;
+  border-radius: 0;
+  border: none;
+}
+
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.map-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  border-radius: 4px;
+}
+
+// Custom Zoom Control Styles
+.custom-zoom-control {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: white;
+  border-radius: 4px;
+  padding: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.zoom-button {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: white;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  
+  &:hover {
+    background: #f0f0f0;
+  }
+  
+  &:active {
+    background: #e0e0e0;
+  }
+}
+
+// Custom Fullscreen Button Styles
+.custom-fullscreen-button {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  
+  &:hover {
+    background: #f0f0f0;
+  }
+  
+  &:active {
+    background: #e0e0e0;
+  }
+  
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+// Popup Styles
+.ol-popup {
+  position: absolute;
+  background-color: white;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #cccccc;
+  bottom: 12px;
+  left: -50px;
+  min-width: 200px;
+  transform: translate(-50%, -100%);
+  display: none;
+  
+  &:after, &:before {
+    top: 100%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+  
+  &:after {
+    border-top-color: white;
+    border-width: 10px;
+    left: 50%;
+    margin-left: -10px;
+  }
+  
+  &:before {
+    border-top-color: #cccccc;
+    border-width: 11px;
+    left: 50%;
+    margin-left: -11px;
+  }
+}
+
+.popup-content {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  line-height: 1.4;
+}

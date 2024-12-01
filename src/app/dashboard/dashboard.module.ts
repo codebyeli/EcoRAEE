@@ -7,6 +7,8 @@ import { MapModule } from '../map/map.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table'
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 
 @NgModule({
@@ -20,6 +22,8 @@ import { MatTableModule } from '@angular/material/table'
     MatDialogModule,
     MatSnackBarModule,
     MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ]
 })
 export class DashboardModule { }
