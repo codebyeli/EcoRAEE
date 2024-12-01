@@ -51,6 +51,14 @@ export class AppointmentsService {
     })
   }
 
+  cancelAppointment(id: string, admin: string):Observable<any> {
+    return this.httpClient.post(`${url}/cancel/${id}`, {admin}, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  }
+
   createAppointment(appointmentInfo: Appointments):Observable<any> {
     return this.httpClient.post(`${url}`, appointmentInfo, {
       headers: {

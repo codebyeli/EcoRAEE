@@ -84,7 +84,7 @@ export class DashboardComponent implements AfterViewInit {
           _id: appointment._id,
           latitude: appointment.latitude,
           longitude: appointment.longitude,
-          description: 'Cita con ' + appointment.profileInfo.name + ' ' + appointment.profileInfo.lastName + ' el ' + appointment.date + ' a las ' + appointment.time,
+          description: 'Cita con ' + appointment.profileInfo.name + ' ' + appointment.profileInfo.lastName + ' el ' + appointment.date + ' a las ' + appointment.time + ' para buscar los siguientes residuos: ' + appointment.description,
         }));
         this.appointments = new MatTableDataSource<any>(appointments);
         this.appointments.sort = this.sort;
@@ -125,15 +125,24 @@ export class DashboardComponent implements AfterViewInit {
     });
   }
 
-  translateStatus(status: boolean) : string {
-    return status ? 'Confirmada' : 'En proceso de confirmación';
+  translateStatus(status: any): string {
+    if (status === undefined) {
+      return 'Pendiente de confirmacion';
+    }
+    return status ? 'Confirmada' : 'Cancelada';
   }
 
-  deleteAppointment(id: string) {
-    this.appointmentsService.deleteAppointment(id).subscribe(() => {
-      this.openSnackBar('Cita eliminada', 'Cerrar');
-      this.specificappointments.data = this.specificappointments.data.filter((appointment: any) => appointment._id !== id);
-      this.appointments.data = this.appointments.data.filter((appointment: any) => appointment._id !== id);
+  cancelAppointment(id: string) {
+    this.appointmentsService.cancelAppointment(id, this.profile.email).subscribe(() => {
+      this.openSnackBar('Cita cancelada', 'Cerrar');
+      const appointment = this.appointments.data.find((appointment: any) => appointment._id === id);
+      if (appointment) {
+        appointment.confirmed = false;
+      }
+      const specificAppointment = this.specificappointments.data.find((appointment: any) => appointment._id === id);
+      if (specificAppointment) {
+        specificAppointment.confirmed = false;
+      }
       this.cdr.detectChanges();
     });
   }

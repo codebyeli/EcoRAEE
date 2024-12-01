@@ -24,7 +24,6 @@ export class AppointmentsComponent implements OnInit {
       location: ['', googleMapsLinkValidator()],
       latitude: ['', Validators.required],
       longitude: ['', Validators.required],
-      confirmed: [false],
     });
   }
 
