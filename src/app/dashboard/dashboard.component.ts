@@ -161,4 +161,22 @@ export class DashboardComponent implements AfterViewInit {
       this.cdr.detectChanges();
     });
   }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLSelectElement).value;
+    this.appointments.filterPredicate = (data: any, filter: string) => {
+      const status = this.translateStatus(data.confirmed);
+      return filter === 'all' || status === filter;
+    };
+  
+    if (filterValue === 'all') {
+      this.appointments.filter = '';
+    } else if (filterValue === 'confirmed') {
+      this.appointments.filter = 'Confirmada';
+    } else if (filterValue === 'cancelled') {
+      this.appointments.filter = 'Cancelada';
+    } else if (filterValue === 'awaiting') {
+      this.appointments.filter = 'Pendiente de confirmacion';
+    }
+  }
 }

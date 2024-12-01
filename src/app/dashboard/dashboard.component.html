@@ -63,6 +63,12 @@
   <div class="dashboard-body">
     <main class="dashboard-content">
       <h2>Citas Totales:</h2>
+      <select id="status-filter" (change)="applyFilter($event)">
+        <option value="all">All</option>
+        <option value="confirmed">Confirmada</option>
+        <option value="cancelled">Cancelada</option>
+        <option value="awaiting">Pendiente de confirmacion</option>
+      </select>
       <table mat-table [dataSource]="appointments" matSort>
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</th>
