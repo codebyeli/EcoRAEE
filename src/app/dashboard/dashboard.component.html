@@ -1,6 +1,6 @@
 <div class="dashboard" *ngIf="!error && (this.profile.admin === false || !this.profile.admin)">
   <header class="dashboard-header">
-    <p>Bienvenido, {{ this.profile.name }}!</p>
+    <p>Bienvenido/a, {{ this.profile.name }}!</p>
   </header>
   <div class="dashboard-body">
     <main class="dashboard-content">
@@ -18,6 +18,10 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Hora</th>
           <td mat-cell *matCellDef="let row">{{ row.time }}</td>
         </ng-container>
+        <ng-container matColumnDef="raees">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Objetos a recojer</th>
+          <td mat-cell *matCellDef="let row">{{ row.description }}</td>
+        </ng-container>
         <ng-container matColumnDef="appointmentCreated">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Cita creada</th>
           <td mat-cell *matCellDef="let row">{{ row.createdAt | date : "dd/MM/yyyy HH:mm:ss" }}</td>
@@ -31,9 +35,6 @@
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef>Acciones</th>
           <td mat-cell *matCellDef="let row">
-            <a (click)="confirmAppointment(row._id)" class="primary-button" *ngIf="translateStatus(row.confirmed) === 'Pendiente de confirmacion'">
-              <span class="material-icons md-36">check</span>
-            </a>
             <a (click)="cancelAppointment(row._id)" class="primary-button" *ngIf="translateStatus(row.confirmed) === 'Pendiente de confirmacion'">
               <span class="material-icons md-36">cancel</span>
             </a>
@@ -58,13 +59,13 @@
 
 <div class="dashboard" *ngIf="!error && this.profile.admin === true">
   <header class="dashboard-header">
-    <p>Bienvenido, Admin {{ this.profile.name + ' ' + this.profile.lastName }}!</p>
+    <p>Bienvenido/a, Admin {{ this.profile.name + ' ' + this.profile.lastName }}!</p>
   </header>
   <div class="dashboard-body">
     <main class="dashboard-content">
       <h2>Citas Totales:</h2>
       <select id="status-filter" (change)="applyFilter($event)">
-        <option value="all">All</option>
+        <option value="all">Todas</option>
         <option value="confirmed">Confirmada</option>
         <option value="cancelled">Cancelada</option>
         <option value="awaiting">Pendiente de confirmacion</option>
@@ -95,6 +96,10 @@
           <td mat-cell *matCellDef="let row">
             {{ row.confirmed !== undefined ? translateStatus(row.confirmed) : 'Pendiente de confirmacion' }}
           </td>
+        </ng-container>
+        <ng-container matColumnDef="raees">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Objetos a recojer</th>
+          <td mat-cell *matCellDef="let row">{{ row.description }}</td>
         </ng-container>
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef>Acciones</th>

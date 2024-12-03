@@ -143,12 +143,11 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
 
-    // Initialize popup overlay
     this.popup = new Overlay({
       element: this.popupElement.nativeElement,
       positioning: 'bottom-center',
       stopEvent: false,
-      offset: [50, 70]
+      offset: [50, 130]
     });
 
     const initialCenter = fromLonLat([this.longitude, this.latitude]);
@@ -180,7 +179,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
         })
       });
 
-      // Add click handler for features
       this.map.on('click', (evt) => {
         const feature = this.map.forEachFeatureAtPixel(evt.pixel, (feature) => feature);
         
@@ -238,18 +236,27 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
         geometry: new Point(coordinates),
         description: location.description
       });
-  
+      
+      let pinColor
+      if (location.confirmed === undefined){
+        pinColor = 'red';
+      } else if (location.confirmed === false){
+        pinColor = 'blue';
+      } else {
+        pinColor = 'green';
+      }
+      
       const iconStyle = new Style({
         image: new Icon({
-          color: location.color || 'red',
+          color: pinColor,
           crossOrigin: 'anonymous',
           src: 'data:image/svg+xml;charset=utf-8,' +
             encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
-              <circle cx="10" cy="10" r="8" fill="${location.color || 'red'}" stroke="white" stroke-width="2" />
+              <circle cx="10" cy="10" r="8" fill="${pinColor}" stroke="white" stroke-width="2" />
             </svg>`)
         })
       });
-  
+      
       marker.setStyle(iconStyle);
       vectorSource.addFeature(marker);
     });

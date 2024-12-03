@@ -4,6 +4,7 @@ export interface LocationMarker {
   latitude: number;
   longitude: number;
   description?: string;
+  confirmed?: boolean;
   icon?: string;
   color?: string;
 }

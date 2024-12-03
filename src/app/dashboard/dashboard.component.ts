@@ -24,6 +24,7 @@ export class DashboardComponent implements AfterViewInit {
     'status',
     'date',
     'time',
+    'raees',
     'appointmentCreated',
     'actions',
   ];
@@ -31,6 +32,7 @@ export class DashboardComponent implements AfterViewInit {
     'status',
     'date',
     'time',
+    'raees',
     'appointmentCreated',
     'actions',
   ];
@@ -69,7 +71,8 @@ export class DashboardComponent implements AfterViewInit {
         if (profile) {
           this.profile = profile;
         }
-        this.specificappointments = new MatTableDataSource<any>(specificAppointments);
+        const visibleSpecificAppointments = specificAppointments.filter((appointment: any) => appointment.confirmed !== false);
+        this.specificappointments = new MatTableDataSource<any>(visibleSpecificAppointments);
         this.specificappointments.sort = this.specificSort;
         this.specificappointments.paginator = this.specificPaginator;
         this.specificappointments.sortingDataAccessor = (item, property) => {
@@ -80,10 +83,12 @@ export class DashboardComponent implements AfterViewInit {
             default: return item[property];
           }
         };
-        this.locations = appointments.map((appointment: any) => ({
+        this.locations = appointments
+        .map((appointment: any) => ({
           _id: appointment._id,
           latitude: appointment.latitude,
           longitude: appointment.longitude,
+          confirmed: appointment.confirmed,
           description: 'Cita con ' + appointment.profileInfo.name + ' ' + appointment.profileInfo.lastName + ' el ' + appointment.date + ' a las ' + appointment.time + ' para buscar los siguientes residuos: ' + appointment.description,
         }));
         this.appointments = new MatTableDataSource<any>(appointments);
@@ -143,6 +148,8 @@ export class DashboardComponent implements AfterViewInit {
       if (specificAppointment) {
         specificAppointment.confirmed = false;
       }
+      const updatedSpecificAppointments = this.specificappointments.data.filter((appointment: any) => appointment.confirmed !== false);
+      this.specificappointments.data = updatedSpecificAppointments;
       this.cdr.detectChanges();
     });
   }
