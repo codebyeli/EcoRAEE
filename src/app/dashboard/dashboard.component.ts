@@ -204,9 +204,18 @@ export class DashboardComponent implements AfterViewInit {
       confirmed: appointment.confirmed,
       description: `Cita con ${appointment.profileInfo.name} ${appointment.profileInfo.lastName} el ${appointment.date} a las ${appointment.time} para buscar los siguientes residuos: ${appointment.description}`,
     }));
-    this.mapComponent.updateLocations(this.locations);
+    this.updateMapMarkers();
     this.cdr.detectChanges();
   }
+
+  private updateMapMarkers(): void {
+    if (this.mapComponent) {
+      this.mapComponent.updateLocations(this.locations);
+    } else {
+      console.error('Map component reference not found');
+    }
+  }
+
 
   applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLSelectElement).value;

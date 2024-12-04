@@ -121,7 +121,7 @@
       </table>
       <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>s
       <div class="dashboard-map">
-        <app-map [locations]="this.locations"></app-map>
+        <app-map #mapComponent [locations]="this.locations"></app-map>
       </div>
     </main>
   </div>
