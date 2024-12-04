@@ -165,6 +165,12 @@ export class DashboardComponent implements AfterViewInit {
     }
     return status ? this.STATUS_CONFIRMED : this.STATUS_CANCELLED;
   }
+
+  checkLocation(longitude: string, latitude: string): void {
+    const url = `https://www.google.com/maps?q=${latitude},${longitude}`;
+    window.open(url, '_blank');
+  }
+  
   
   cancelAppointment(id: string): void {
     this.appointmentsService.cancelAppointment(id, this.profile.email).subscribe(() => {

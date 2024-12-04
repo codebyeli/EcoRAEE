@@ -110,6 +110,9 @@
             <a (click)="cancelAppointment(row._id)" class="primary-button" *ngIf="translateStatus(row.confirmed) === 'Pendiente de confirmacion'">
               <span class="material-icons md-36">cancel</span>
             </a>
+            <a (click)="checkLocation(row.longitude, row.latitude)" class="primary-button">
+              <span class="material-icons md-36">location_on</span>
+            </a>
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
