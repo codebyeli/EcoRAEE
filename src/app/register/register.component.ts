@@ -11,6 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class RegisterComponent implements OnInit {
   public registerForm!: FormGroup;
+  passwordFieldType: string = 'password';
 
   constructor(private fb: FormBuilder, private loginService: LoginService, private _snackBar: MatSnackBar) {}
 
@@ -29,6 +30,10 @@ export class RegisterComponent implements OnInit {
       username: ['', [Validators.required, isValidDominicanID]],
       password: ['', [Validators.required, passwordValidator]]
     });
+  }
+
+  togglePasswordVisibility() {
+    this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
   }
 
   formatID(event: Event): void {
