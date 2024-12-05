@@ -2,30 +2,39 @@ name: Frontend CI/CD
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '18.19'
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.19'
 
-    - name: Install Dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Build
-      run: npm run build
+      - name: Build
+        run: npm run build --prod
 
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./dist/your-project-name
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist/eco-raee
+          publish_branch: gh-pages
+          allow_empty_commit: false
+          keep_files: false
+          force_orphan: true
+          enable_jekyll: false
+          disable_nojekyll: true
