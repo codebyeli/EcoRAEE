@@ -9,6 +9,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table'
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { ConfirmDialogModule } from '../confirm-dialog/confirm-dialog.module';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { MatSortModule } from '@angular/material/sort';
     MatSnackBarModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    ConfirmDialogModule
   ]
 })
 export class DashboardModule { }

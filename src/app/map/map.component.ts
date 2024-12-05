@@ -106,8 +106,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @Input() locations: LocationMarker[] = [];
   @Input() containerClass: string = '';
-  @Input() latitude: number = 51.505;
-  @Input() longitude: number = -0.09;
+  @Input() latitude: number = 18.4816344;
+  @Input() longitude: number = -69.9152534;
   @Input() zoomLevel: number = 13;
   @Input() minZoom: number = 10;
   @Input() maxZoom: number = 18;
@@ -239,9 +239,9 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       
       let pinColor
       if (location.confirmed === undefined){
-        pinColor = 'red';
-      } else if (location.confirmed === false){
         pinColor = 'blue';
+      } else if (location.confirmed === false){
+        pinColor = 'red';
       } else {
         pinColor = 'green';
       }

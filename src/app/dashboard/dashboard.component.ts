@@ -10,6 +10,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MapComponent } from '../map/map.component';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -109,13 +110,16 @@ export class DashboardComponent implements AfterViewInit {
   }
 
   private setupAppointments(appointments: any[]): void {
-    this.locations = appointments.map(appointment => ({
+    this.locations = appointments
+    .filter(appointment => appointment.confirmed !== false)
+    .map(appointment => ({
       _id: appointment._id,
       latitude: appointment.latitude,
       longitude: appointment.longitude,
       confirmed: appointment.confirmed,
       description: `Cita con ${appointment.profileInfo.name} ${appointment.profileInfo.lastName} el ${appointment.date} a las ${appointment.time} para buscar los siguientes residuos: ${appointment.description}`,
     }));
+  
     this.appointments = new MatTableDataSource<any>(appointments);
     this.appointments.sort = this.sort;
     this.appointments.paginator = this.paginator;
@@ -173,16 +177,38 @@ export class DashboardComponent implements AfterViewInit {
   
   
   cancelAppointment(id: string): void {
-    this.appointmentsService.cancelAppointment(id, this.profile.email).subscribe(() => {
-      this.openSnackBar('Cita cancelada', 'Cerrar');
-      this.updateAppointmentStatus(id, false);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.appointmentsService.cancelAppointment(id, this.profile.email).subscribe(() => {
+          this.openSnackBar('Cita cancelada', 'Cerrar');
+          this.updateAppointmentStatus(id, false);
+        });
+      }
+    });
+  }
+
+  deleteAppointment(id: string): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.appointmentsService.deleteAppointment(id).subscribe(() => {
+          this.openSnackBar('Cita borrada', 'Cerrar');
+          this.updateAppointmentStatus(id, false);
+        });
+      }
     });
   }
   
   confirmAppointment(id: string): void {
-    this.appointmentsService.confirmAppointment(id).subscribe(() => {
-      this.openSnackBar('Cita confirmada', 'Cerrar');
-      this.updateAppointmentStatus(id, true);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.appointmentsService.confirmAppointment(id).subscribe(() => {
+          this.openSnackBar('Cita confirmada', 'Cerrar');
+          this.updateAppointmentStatus(id, true);
+        });
+      }
     });
   }
   
@@ -203,7 +229,7 @@ export class DashboardComponent implements AfterViewInit {
   }
   
   private updateLocations(): void {
-    this.locations = this.appointments.data.map(appointment => ({
+    this.locations = this.appointments.data.filter(appointment => appointment.confirmed !== false).map(appointment => ({
       _id: appointment._id,
       latitude: appointment.latitude,
       longitude: appointment.longitude,
