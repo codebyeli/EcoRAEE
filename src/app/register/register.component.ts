@@ -12,6 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class RegisterComponent implements OnInit {
   public registerForm!: FormGroup;
   passwordFieldType: string = 'password';
+  confirmPasswordFieldType: string = 'password';
 
   constructor(private fb: FormBuilder, private loginService: LoginService, private _snackBar: MatSnackBar) {}
 
@@ -28,12 +29,17 @@ export class RegisterComponent implements OnInit {
       email: ['', [Validators.required, emailValidator]],
       birthday: ['', Validators.required],
       username: ['', [Validators.required, isValidDominicanID]],
-      password: ['', [Validators.required, passwordValidator]]
+      password: ['', [Validators.required, passwordValidator]],
+      confirmPassword: ['', [Validators.required, passwordValidator]]
     });
   }
 
   togglePasswordVisibility() {
     this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
+  }
+
+  toggleConfirmPasswordVisibility() {
+    this.confirmPasswordFieldType = this.confirmPasswordFieldType === 'password' ? 'text' : 'password';
   }
 
   formatID(event: Event): void {
@@ -56,13 +62,17 @@ export class RegisterComponent implements OnInit {
     let birthday = this.registerForm.get('birthday')?.valid;
     let username = this.registerForm.get('username')?.valid;
     let password = this.registerForm.get('password')?.valid;
-    return name! && lastName! && email! && birthday! && username! && password!;
+    let passwordToConfirm = this.registerForm.get('password')?.value;
+    let confirmPassword = this.registerForm.get('confirmPassword')?.value;
+    return name! && lastName! && email! && birthday! && username! && password! && passwordToConfirm === confirmPassword;
   }
 
   register() {
     if (this.registerForm.valid) {
-      this.loginService.register(this.registerForm.value).subscribe((res) => {
-        location.href = '/dashboard' + res._id;
+      const formValue = this.registerForm.value;
+      const { confirmPassword, ...registerForm } = formValue;
+      this.loginService.register(formValue).subscribe((res) => {
+        location.href = '/dashboard/' + res._id;
       }, error => {
           this.openSnackBar('Esta cédula ya está registrada', 'Cerrar')
       });
