@@ -125,7 +125,10 @@
           <td class="mat-cell" colspan="4">No se encontraron resultados</td>
         </tr>
       </table>
-      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>s
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      <p>Leyenda:</p>
+      <p>🔵 Citas en proceso de confirmacion</p>
+      <p>🟢 Citas confirmadas</p>
       <div class="dashboard-map">
         <app-map #mapComponent [locations]="this.locations"></app-map>
       </div>
