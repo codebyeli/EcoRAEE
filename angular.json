@@ -24,7 +24,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "baseHref": "/EcoRAEE/",
             "outputPath": "dist/eco-raee",
             "index": "src/index.html",
             "browser": "src/main.ts",

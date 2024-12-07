@@ -1,29 +1,122 @@
 <app-header></app-header>
 <div class="landing-page">
-    <header class="hero">
-      <div class="hero-content">
-        <h1>{{ title }}</h1>
-        <h2>{{ subtitle }}</h2>
-        <p>{{ description }}</p>
-        <a href="/login" class="cta-button">Únete al Reciclaje</a>
-      </div>
-    </header>
-  
-    <section class="mission">
-      <div class="container">
-        <h2>Nuestra Misión</h2>
-        <p>{{ mission }}</p>
-      </div>
-    </section>
-  
-    <section class="services">
-      <div class="container">
-        <h2>¿Qué Hacemos?</h2>
-        <ul>
-          <li *ngFor="let service of services">{{ service }}</li>
-        </ul>
-        <p>¿Quieres saber más sobre nosotros? <a href="/about-us" class="link">¡Conoce al equipo!</a></p>
-      </div>
-    </section>
-  </div>
-  
+  <header class="hero">
+    <div class="hero-content">
+      <h1>{{ title }}</h1>
+      <h2>{{ subtitle }}</h2>
+      <p>{{ description }}</p>
+      <a href="/register" class="cta-button">Únete al Reciclaje</a>
+    </div>
+  </header>
+
+  <section class="mission">
+    <div class="container">
+      <h2>Nuestra Visión</h2>
+      <p>{{ vision }}</p>
+    </div>
+  </section>
+
+  <section class="services">
+    <div class="container">
+      <h2>¿Qué Hacemos?</h2>
+      <ul>
+        <li *ngFor="let service of services">{{ service }}</li>
+      </ul>
+      <p>
+        ¿Quieres saber más sobre nosotros?
+        <a href="/about-us" class="link">¡Conoce al equipo!</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="mission">
+    <div class="container">
+      <h2>¿Qué son las RAEE?</h2>
+      <p>
+        Los RAEE son residuos generados por aparatos eléctricos y electrónicos
+        que ya no son útiles o han llegado al final de su vida útil. Estos
+        aparatos incluyen desde teléfonos móviles y computadoras hasta
+        electrodomésticos como refrigeradores y lavadoras.
+      </p>
+    </div>
+  </section>
+
+  <section class="mission">
+    <div class="container">
+      <h2>Impacto Ambiental</h2>
+      <p>
+        Los RAEE contienen materiales peligrosos como metales pesados (plomo,
+        mercurio, cadmio) y sustancias químicas que pueden ser dañinas para el
+        medio ambiente y la salud humana si no se gestionan adecuadamente. La
+        incorrecta disposición de estos residuos puede contaminar el suelo, el
+        agua y el aire.
+      </p>
+    </div>
+  </section>
+
+  <section class="mission">
+    <div class="container">
+      <h2>¿Como se clasifican las RAEE?</h2>
+      <p>
+        Los RAEE, se clasifican según su tipo y uso, facilitando su gestión y
+        reciclaje responsable. Entre las principales categorías se encuentran
+        los grandes electrodomésticos, como neveras y lavadoras, y los pequeños
+        electrodomésticos, como licuadoras y planchas, que contienen materiales
+        valiosos como acero y cobre. También destacan los equipos de informática
+        y telecomunicaciones, como ordenadores y móviles, ricos en metales
+        preciosos, y los aparatos electrónicos de consumo, como televisores y
+        sistemas de sonido, que combinan plásticos y componentes electrónicos
+        reutilizables. Otras categorías incluyen los aparatos de alumbrado, como
+        lámparas LED y fluorescentes, que requieren un manejo especial por
+        contener sustancias como mercurio, y los instrumentos eléctricos y
+        electrónicos usados en entornos profesionales, como hospitales y
+        laboratorios. Además, se consideran herramientas eléctricas, juguetes y
+        máquinas expendedoras. Clasificar y reciclar correctamente estos
+        residuos no solo recupera recursos, sino que también reduce el impacto
+        ambiental, transformándolos en una oportunidad para la sostenibilidad.
+      </p>
+    </div>
+  </section>
+
+  <section class="mission">
+    <div class="container">
+      <h2>Beneficios del Reciclaje de RAEE</h2>
+      <p></p>
+      <ul>
+        <li>
+          <b>Reducción de la contaminación:</b> Evita la liberación de
+          sustancias tóxicas al medio ambiente.
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <b>Conservación de recursos:</b> Recupera materiales valiosos que
+          pueden ser reutilizados.
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <b>Ahorro de energía:</b> Reciclar materiales consume menos energía
+          que producirlos desde cero.
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <b>Generación de empleo:</b> Crea oportunidades de trabajo en el
+          sector del reciclaje y la gestión de residuos.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="mission">
+    <div class="container">
+      <h2>¿Sabías que...?</h2>
+      <p>
+        La vida útil de un teléfono móvil se ha reducido a la mitad en los
+        últimos años. Esto genera una enorme cantidad de residuos electrónicos
+        que pueden tardar cientos de años en descomponerse.
+      </p>
+    </div>
+  </section>
+</div>
