@@ -81,7 +81,7 @@ toggleConfirmPasswordVisibility() {
         }
         else {
           this.openSnackBar('El cambio de contraseña ha sido efectuado', 'Cerrar')
-          location.href = '/login';
+          location.href = '/EcoRAEE/login';
         }
       });
     }

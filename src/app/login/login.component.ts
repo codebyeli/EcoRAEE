@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
           this.openSnackBar('Credenciales incorrectas', 'Cerrar')
         }
         else if (res._id){
-          location.href = '/dashboard/' + res._id
+          location.href = '/EcoRAEE/dashboard/' + res._id
         }
       });
     }

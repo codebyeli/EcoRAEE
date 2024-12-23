@@ -72,7 +72,7 @@ export class RegisterComponent implements OnInit {
       const formValue = this.registerForm.value;
       const { confirmPassword, ...registerForm } = formValue;
       this.loginService.register(formValue).subscribe((res) => {
-        location.href = '/dashboard/' + res._id;
+        location.href = '/EcoRAEE/dashboard/' + res._id;
       }, error => {
           this.openSnackBar('Esta cédula ya está registrada', 'Cerrar')
       });
