@@ -22,19 +22,29 @@ jobs:
           node-version: '18.19'
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          npm install
+          npm install -g angular-cli-ghpages
+
+      - name: Clean dist
+        run: rm -rf dist
 
       - name: Build
-        run: npm run build --prod
+        run: ng build --output-path=dist/browser --base-href=/EcoRAEE/
+
+      - name: Fix directory structure
+        run: |
+          if [ -d "dist/browser/browser" ]; then
+            mv dist/browser/browser/* dist/browser/
+            rm -rf dist/browser/browser
+          fi
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: angular-cli-ghpages/angular-cli-ghpages@v1.0.0
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist/browser
-          publish_branch: gh-pages
-          allow_empty_commit: false
-          keep_files: false
-          force_orphan: true
-          enable_jekyll: false
-          disable_nojekyll: true
+          dir: dist/browser
+          repo: https://github.com/${{ github.repository }}.git
+          name: github-actions
+          email: github-actions@github.com
+          commit_message: "Deploy to GitHub Pages"
+          branch: gh-pages
