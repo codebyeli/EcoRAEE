@@ -25,6 +25,11 @@ jobs:
           npm install
           npm install -g @angular/cli
 
+      - name: Create environment files
+        run: |
+          echo "export const environments = { production: false, loginApiUrl: '${{ secrets.LOGIN_API_URL }}', appointmentsApiUrl: '${{ secrets.APPOINTMENTS_API_URL }}' };" > src/environments/environment.ts
+          echo "export const environments = { production: true, loginApiUrl: '${{ secrets.LOGIN_API_URL }}', appointmentsApiUrl: '${{ secrets.APPOINTMENTS_API_URL }}' };" > src/environments/environment.prod.ts
+
       - name: Build
         run: ng build --output-path=dist/browser --base-href=/EcoRAEE/
 
