@@ -1,9 +1,0 @@
-{
-  "routes": [
-    "/",
-    "/about-us",
-    "/forgot-password",
-    "/login",
-    "/register"
-  ]
-}
