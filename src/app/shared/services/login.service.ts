@@ -22,7 +22,7 @@ export class LoginService {
   }
 
   login(loginInfo: Login):Observable<any> {
-    return this.httpClient.post(`${url}/userAccess`, loginInfo, {
+    return this.httpClient.post(`${url}/access`, loginInfo, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -30,7 +30,7 @@ export class LoginService {
   }
 
   changePassword(loginInfo: ForgotPasswordInfo):Observable<any> {
-    return this.httpClient.post(`${url}/forgotPassword`, loginInfo, {
+    return this.httpClient.post(`${url}/forgot-password`, loginInfo, {
       headers: {
         'Content-Type': 'application/json',
       },
