@@ -190,38 +190,6 @@ form {
     gap: $base-spacing;
   }
   
-.hero {
-    margin-bottom: 20px;
-    background: url("/../../assets/hero-landing.jpeg") no-repeat center center;
-    background-size: cover;
-    color: white;
-    text-align: center;
-    padding: 100px 20px;
-    position: relative;
-    min-height: 400px;
-  
-    .hero-content {
-      max-width: 600px;
-      margin: 0 auto;
-    }
-  
-    .cta-button {
-      background-color: $secondary-color;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      font-size: 1.1rem;
-      cursor: pointer;
-      border-radius: $border-radius;
-      transition: background-color 0.3s ease;
-  
-      &:hover {
-        background-color: darken($secondary-color, 10%);
-      }
-    }
-
-  }
-  
 
 @media (max-width: $mobile-breakpoint) {
     body {
