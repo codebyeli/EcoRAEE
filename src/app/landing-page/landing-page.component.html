@@ -5,7 +5,7 @@
       <h1>{{ title }}</h1>
       <h2>{{ subtitle }}</h2>
       <p>{{ description }}</p>
-      <a href="/EcoRAEE/register" class="cta-button">Únete al Reciclaje</a>
+      <a [routerLink]="['/register']" class="cta-button">Únete al Reciclaje</a>
     </div>
   </header>
 
@@ -24,7 +24,7 @@
       </ul>
       <p>
         ¿Quieres saber más sobre nosotros?
-        <a href="/EcoRAEE/about-us" class="link">¡Conoce al equipo!</a>
+        <a [routerLink]="['/about-us']" class="link">¡Conoce al equipo!</a>
       </p>
     </div>
   </section>

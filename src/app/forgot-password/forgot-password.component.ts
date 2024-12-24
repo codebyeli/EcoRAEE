@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoginService } from '../shared/services/login.service';
 import { emailValidator, isValidDominicanID, passwordValidator } from '../shared/utils/utils';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-forgot-password',
@@ -15,7 +16,7 @@ export class ForgotPasswordComponent {
   passwordFieldType: string = 'password';
   confirmPasswordFieldType: string = 'password';
 
-  constructor(private fb: FormBuilder, private loginService: LoginService, private _snackBar: MatSnackBar) {}
+  constructor(private fb: FormBuilder, private loginService: LoginService, private _snackBar: MatSnackBar, private router: Router) {}
 
   openSnackBar(message: string, action: string){
     this._snackBar.open(message, action, {
@@ -81,7 +82,7 @@ toggleConfirmPasswordVisibility() {
         }
         else {
           this.openSnackBar('El cambio de contraseña ha sido efectuado', 'Cerrar')
-          location.href = '/EcoRAEE/login';
+          this.router.navigate(['/login']);
         }
       });
     }

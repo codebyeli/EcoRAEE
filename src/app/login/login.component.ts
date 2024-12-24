@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from './../shared/services/login.service';
 import { isValidDominicanID } from '../shared/utils/utils';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,8 +13,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class LoginComponent implements OnInit {
   public loginForm!: FormGroup;
   public attemptedSubmit = false;
+  passwordFieldType: string = 'password';
 
-  constructor(private fb: FormBuilder, private loginService: LoginService, private _snackBar: MatSnackBar) {}
+  constructor(private fb: FormBuilder, private loginService: LoginService, private _snackBar: MatSnackBar, private router: Router) {}
 
   openSnackBar(message: string, action: string){
     this._snackBar.open(message, action, {
@@ -51,6 +53,10 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  togglePasswordVisibility() {
+    this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
+  }
+
   login() {
     this.attemptedSubmit = true;
     if (this.loginForm.valid) {
@@ -59,7 +65,7 @@ export class LoginComponent implements OnInit {
           this.openSnackBar('Credenciales incorrectas', 'Cerrar')
         }
         else if (res._id){
-          location.href = '/EcoRAEE/dashboard/' + res._id
+          this.router.navigate(['/dashboard', res._id])
         }
       });
     }

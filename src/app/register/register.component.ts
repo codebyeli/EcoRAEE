@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from './../shared/services/login.service';
 import { emailValidator, isValidDominicanID, passwordValidator } from '../shared/utils/utils';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,7 @@ export class RegisterComponent implements OnInit {
   passwordFieldType: string = 'password';
   confirmPasswordFieldType: string = 'password';
 
-  constructor(private fb: FormBuilder, private loginService: LoginService, private _snackBar: MatSnackBar) {}
+  constructor(private fb: FormBuilder, private loginService: LoginService, private _snackBar: MatSnackBar, private router:Router) {}
 
   openSnackBar(message: string, action: string){
     this._snackBar.open(message, action, {
@@ -72,7 +73,7 @@ export class RegisterComponent implements OnInit {
       const formValue = this.registerForm.value;
       const { confirmPassword, ...registerForm } = formValue;
       this.loginService.register(formValue).subscribe((res) => {
-        location.href = '/EcoRAEE/dashboard/' + res._id;
+        this.router.navigate(['/dashboard', res._id]);
       }, error => {
           this.openSnackBar('Esta cédula ya está registrada', 'Cerrar')
       });
