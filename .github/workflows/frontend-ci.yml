@@ -15,11 +15,19 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          persist-credentials: false
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '18.19'
+
+      # Configure Git for automated commits
+      - name: Configure Git for GitHub Actions
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Install dependencies
         run: |
@@ -43,4 +51,9 @@ jobs:
       - name: Deploy to GitHub Pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx angular-cli-ghpages --dir=dist/browser --no-silent
+        run: |
+          npx angular-cli-ghpages \
+            --dir=dist/browser \
+            --name="github-actions[bot]" \
+            --email="github-actions[bot]@users.noreply.github.com" \
+            --no-silent
