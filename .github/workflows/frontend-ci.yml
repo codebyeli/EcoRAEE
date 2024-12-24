@@ -25,10 +25,11 @@ jobs:
           npm install
           npm install -g @angular/cli
 
-      - name: Create environment files
+      - name: Overwrite environment variables
         run: |
-          echo "export const environments = { production: false, loginApiUrl: '${{ secrets.LOGIN_API_URL }}', appointmentsApiUrl: '${{ secrets.APPOINTMENTS_API_URL }}' };" > src/environments/environment.ts
-          echo "export const environments = { production: true, loginApiUrl: '${{ secrets.LOGIN_API_URL }}', appointmentsApiUrl: '${{ secrets.APPOINTMENTS_API_URL }}' };" > src/environments/environment.prod.ts
+          sed -i "s|loginApiUrl: 'http://localhost:3300/login'|loginApiUrl: '${{ secrets.LOGIN_API_URL }}'|g" src/environments/environment.ts
+          sed -i "s|appointmentsApiUrl: 'http://localhost:3400/appointments'|appointmentsApiUrl: '${{ secrets.APPOINTMENTS_API_URL }}'|g" src/environments/environment.ts
+          sed -i "s|production: false|production: true|g" src/environments/environment.ts
 
       - name: Build
         run: ng build --output-path=dist/browser --base-href=/EcoRAEE/
