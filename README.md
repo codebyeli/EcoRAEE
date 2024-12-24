@@ -1,27 +1,48 @@
 # EcoRAEE
+<img src="https://github.com/user-attachments/assets/f7e92451-e53c-44cb-80ef-5b496a9edf6d" alt="EcoRAEE" width="100"/>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.9.
+**EcoRAEE** es una aplicación web desarrollada con el propósito de crear conciencia y facilitar el proceso de reciclaje de Residuos de Aparatos Eléctricos y Electrónicos (RAEE). Este proyecto fue creado como parte de los requisitos para optar al título de Ingeniería en Sistemas.
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Descripción General
 
-## Code scaffolding
+EcoRAEE proporciona un enfoque integral para promover el manejo responsable de los RAEE, reduciendo su impacto negativo en el medio ambiente. A través de una interfaz amigable y funcional, los usuarios pueden aprender sobre el reciclaje sostenible y participar activamente en el proceso de recolección de estos residuos.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Características Principales
 
-## Build
+1. **Página de Inicio (Landing Page):**
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+   - Información general sobre qué son los RAEE
+   - Consejos prácticos para manejarlos de forma responsable.
+   - Beneficios ambientales de su correcto reciclaje.
 
-## Running unit tests
+2. **Página Institucional:**
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+   - Misión, visión y valores de EcoRAEE como entidad ficticia comprometida con la sostenibilidad.
 
-## Running end-to-end tests
+3. **Módulo de Autenticación:**
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+   - Inicio de sesión.
+   - Recuperación de contraseña.
+   - Registro de nuevos usuarios.
 
-## Further help
+4. **Dashboard para Usuarios y Administradores:**
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+   - Gestión de citas para la recolección de RAEE.
+   - Herramientas diferenciadas para usuarios regulares y administradores.
+
+---
+
+## Tecnologías Utilizadas
+
+EcoRAEE combina tecnologías modernas y mejores prácticas de desarrollo web para garantizar una experiencia fluida y eficiente. Entre estas se encuentran:
+
+- **Frontend:** Diseño responsivo y accesible, manejado y hecho con Angular.
+- **Backend:** Arquitectura robusta para la gestión segura de datos, hecho con NodeJS y NestJS.
+- **Base de datos:** Almacenamiento confiable de información de usuarios y citas, manejada con MongoDB
+
+---
+
+EcoRAEE representa un compromiso con el futuro sostenible, promoviendo el reciclaje y la conciencia ambiental a través de la tecnología. Este proyecto no solo es una demostración de habilidades técnicas, sino también un aporte significativo hacia un mundo más limpio y responsable.
+
