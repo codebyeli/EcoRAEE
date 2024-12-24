@@ -157,9 +157,13 @@ export class DashboardComponent implements AfterViewInit {
   }
 
   openAppointmentsDialog(): void {
-    this.dialog.open(AppointmentsComponent, {
+    const dialogRef = this.dialog.open(AppointmentsComponent, {
       width: '600px',
       data: this.profile
+    });
+
+    dialogRef.componentInstance.appointmentCreated.subscribe(() => {
+      this.loadData(this.idProfile!);
     });
   }
 

@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import flatpickr from 'flatpickr';
@@ -12,6 +12,7 @@ import { AppointmentsService } from '../shared/services/appointments.service';
   styleUrls: ['./appointments.component.scss']
 })
 export class AppointmentsComponent implements OnInit {
+  @Output() appointmentCreated = new EventEmitter<void>();
   appointmentForm: FormGroup;
   timeSlots: string[] = this.generateTimeSlots();
 
@@ -72,18 +73,18 @@ onSubmit(): void {
   if (this.appointmentForm.valid) {
     const formValue = this.appointmentForm.value;
     const { location, ...appointment } = formValue;
-    this.dialogRef.close(appointment);
     this.appointmentsService.createAppointment(appointment).subscribe({
       next: () => {
         this.snackBar.open('Cita creada correctamente, esperando confirmacion...', 'Close', {
           duration: 3000,
         });
-      }, error: (error) => {
-        console.log(error)
+        this.appointmentCreated.emit();
+        this.dialogRef.close();
+      },
+      error: (error) => {
+        console.log(error);
       }
-    })
-    window.location.reload();
-    this.appointmentForm.reset();
+    });
   }
 }
 }
